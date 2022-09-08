@@ -1,0 +1,60 @@
+.pong_game{
+    height: 100%;
+
+    .pong_bar{
+        background-color: black;
+        --background-color: black;
+        color: white;
+    }
+
+    .pong_main_game{
+        background-color: black;
+        --background-color: black;
+        position: relative;
+        border: solid 1px white;
+
+        padding: 0;
+
+        #separator{
+            height: 100%;
+            width: 1px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            --background-color: white;
+        }
+
+        .bar{
+            background-color: white;
+            --background-color: white;
+            height: 100px;
+            width: 20px;
+            position: absolute;
+            transform-origin: center;
+            top: 50%;
+            transform: translateY(-50%);
+
+            &#bar1{
+                left: 2%;
+            }
+
+            &#bar2{
+                right: 2%;
+            }
+        }
+
+        #ball{
+            background-color: white;
+            --background-color: white;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            position: absolute;
+            transform-origin: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
