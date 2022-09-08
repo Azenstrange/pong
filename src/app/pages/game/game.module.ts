@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { GamePageRoutingModule } from './game-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 
 import { GamePage } from './game.page';
 
@@ -13,7 +14,8 @@ import { GamePage } from './game.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GamePageRoutingModule
+    GamePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [GamePage]
 })
