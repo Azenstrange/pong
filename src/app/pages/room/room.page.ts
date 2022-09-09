@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -9,32 +9,35 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class RoomPage implements OnInit {
   presentingElement = undefined;
-
-  constructor(private actionSheetCtrl: ActionSheetController) { }
+  roomsList = [
+    {},{},{},{},{},{},{},{},{},{}
+  ];
+  constructor(private alertController: AlertController) { }
 
   ngOnInit() {
-    this.presentingElement = document.querySelector('.ion-page')
   }
-  canDismiss = async () => {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Are you sure?',
+
+  async createRoom() {
+    const alert = await this.alertController.create({
+      header: 'Create a Room',
       buttons: [
         {
-          text: 'Yes',
-          role: 'confirm',
-        },
-        {
-          text: 'No',
-          role: 'cancel',
-        },
+          text: 'Create',
+          handler: data => {
+            console.log(data[0]);
+          }
+        }
       ],
+      inputs: [
+        {
+          placeholder: 'Room Name'
+        }
+      ]
     });
 
-    actionSheet.present();
-
-    const { role } = await actionSheet.onWillDismiss();
-
-    return role === 'confirm';
-  };
-
+    await alert.present();
+  }
+  openRoom(roomName: string) {
+    //
+  }
 }
