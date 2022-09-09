@@ -93,6 +93,17 @@ export class GamePage implements OnInit {
         this.calculation();
       }, 16);
 
+      window.addEventListener('keydown', (key) => {
+        if (key.keyCode === 38 ){
+          console.log('up');
+          console.log(key);
+        }
+        else if (key.keyCode === 40 ){
+          console.log('down');
+          console.log(key);
+        }
+      });
+
     }, 1000);
   }
 
