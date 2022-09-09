@@ -24,8 +24,18 @@
     flex-direction: column;
     height: 20vh;
     width: 20vw;
-    color: black;
 }
 .pong_room_text{
     color: black;
+}
+.modal_create{
+    --background: black;
+    background: black;
+    padding: 10px;
+    color:white;
+}
+.modal_create_button{
+    display: flex;
+    --background: white;
+    --color: black;
 }
