@@ -10,26 +10,12 @@
               <ion-button id="create-room" expand="block" class="ion-justify-content-center searchbar_button" (click)="createRoom()">
                 <p class="ion-text-center">Create room</p>
               </ion-button>
-              <!-- <ion-modal #modal trigger="create-room" [swipeToClose]="true" [canDismiss]="canDismiss">
-                <ng-template>
-                  <ion-content class="modal_create">
-                    <ion-toolbar class="modal_create">
-                      <ion-title>CHOOSE A NAME FOR YOUR ROOM:</ion-title>
-                      <ion-input placeholder="input a Name"></ion-input>
-                      <ion-button class="ion-justify-content-center modal_create_button">Create Room</ion-button>
-                      <ion-buttons slot="end">
-                        <ion-button (click)="modal.dismiss()">Close</ion-button>
-                      </ion-buttons>
-                    </ion-toolbar>
-                  </ion-content>
-                </ng-template>
-              </ion-modal> -->
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <ion-button id="create-help" expand="block" class="ion-justify-content-center searchbar_button">PRESS FOR HELP</ion-button>
-              <ion-modal #modal trigger="create-help" [swipeToClose]="true" [canDismiss]="canDismiss">
+              <ion-modal #modal trigger="create-help" [swipeToClose]="true">
                 <ng-template>
                   <ion-content class="modal_create">
                     <ion-row>
@@ -37,7 +23,7 @@
                         <ion-title class="modal_create ion-text-center ion-margin-top">USE THE ARROW KEYS TO MOVE</ion-title>
                         <img src="../../assets\arroxs.png" alt="" class="ion-align-items-center help-img">
                       </ion-col>
-                    </ion-row>                   
+                    </ion-row>
 
                   </ion-content>
                 </ng-template>
@@ -51,7 +37,7 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col size="2.5" tappable (click)="openRoom('roomName')" class="ion-margin-end" *ngFor="let room of roomsList">
+          <ion-col size="2.5" tappable (click)="openRoom('roomName')" class="ion-margin-end ion-margin-vertical" *ngFor="let room of roomsList">
 
             <ion-grid class="pong_room">
               <ion-row>
@@ -61,7 +47,7 @@
               </ion-row>
                <ion-row>
                 <ion-col>
-                  <p class="ion-no-margin ion-margin-bottom">ROOM NAME 1</p>
+                  <p class="ion-no-margin ion-margin-bottom">{{room}}</p>
                 </ion-col>
                </ion-row>
             </ion-grid>

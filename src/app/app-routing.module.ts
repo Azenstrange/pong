@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'game',
+    path: 'game/:userName/:roomName/:reason',
     loadChildren: () => import('./pages/game/game.module').then( m => m.GamePageModule)
   },
 ];
