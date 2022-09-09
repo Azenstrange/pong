@@ -22,8 +22,9 @@
 .pong_room{
     display: flex;
     flex-direction: column;
-    height: 20vh;
-    width: 20vw;
+    height: 15vh;
+    width: 15vw;
+    margin-bottom: 5vh;
 }
 .pong_room_text{
     color: black;
