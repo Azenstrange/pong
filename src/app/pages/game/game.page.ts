@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game',
@@ -48,7 +49,9 @@ export class GamePage implements OnInit {
     this.userName = this.route.snapshot.paramMap.get('userName');
     this.roomName = this.route.snapshot.paramMap.get('roomName');
     this.reason =  this.route.snapshot.paramMap.get('reason');
-    console.log(this.userName, this.roomName);
+    console.log(this.userName);
+    console.log(this.roomName);
+    console.log(this.reason);
     this.socket.connect();
 
     if (this.reason === 'create') {
@@ -59,22 +62,20 @@ export class GamePage implements OnInit {
 
     this.socket.on('invalid-room-name', () => {
       console.log('invalid room name');
+      //todo send back
     });
 
     this.socket.on('room-created', roomName => {
-      console.log(roomName.roomName);
       console.log(`room ${roomName.roomName} created !`);
     });
 
     this.socket.on('full-room', () => {
       console.log('Room is full');
+      //todo send back
     });
 
-    this.socket.on('room-joined', (roomName, users) => {
-      console.log(roomName);
-      console.log(`room ${roomName.roomName} is joined !`);
-      console.log('connected user : ');
-      users.forEach(user => {
+    this.socket.fromEvent('room-joined').subscribe((data: any) => {
+      data.users.forEach(user => {
         console.log(user.name);
       });
     });
