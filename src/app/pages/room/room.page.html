@@ -1,12 +1,58 @@
 <app-navbar></app-navbar>
 
 <ion-content>
-  <ion-row class="pong_room">
-    <ion-col size="2" class="pong_searchsize">
-      <ion-item class="pong_searchbar">
-        <p>bobo</p>
+  <ion-row class="pong_rooms">
+    <ion-col size="3" class="pong_searchsize">
+      <ion-item   class="pong_searchbar">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-searchbar placeholder="Search Name"></ion-searchbar>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="ion-text-center searchbar_text">OR</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button class="ion-justify-content-center searchbar_button">
+                <p class="ion-text-center">Create room</p>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h1 class="ion-text-center searchbar_text">PRESS “H” FOR HELP</h1>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
       </ion-item>
     </ion-col>
-    <ion-col size="6"><p>bobo</p></ion-col>
+    <ion-col>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+
+            <ion-grid class="pong_room">
+              <ion-row>
+                <ion-col>
+                  <img src="../../assets/pong.png" alt="">
+                </ion-col>
+              </ion-row>
+               <ion-row>
+                <ion-col>
+                  <p class="ion-text-center pong_room_text">ROOM NAME 1</p>
+                </ion-col>
+               </ion-row>
+            </ion-grid>
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-col>
   </ion-row>
 </ion-content>

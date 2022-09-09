@@ -1,11 +1,31 @@
-.pong_room{
+.pong_rooms{
     height: 100%;
 }
 .pong_searchbar{
-    background-color: black;
-    --background-color: black;
+    background: black;
+    --background: black;
+    padding: 0px;
 }
 .pong_searchsize{
     background-color: black;
     --background-color: black;
+}
+.searchbar_button{
+    display: flex;
+    --background: white;
+    height: 5vh;
+    color:black;
+}
+.searchbar_text{
+    color: white;
+}
+.pong_room{
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    width: 20vw;
+    color: black;
+}
+.pong_room_text{
+    color: black;
 }
