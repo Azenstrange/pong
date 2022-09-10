@@ -18,7 +18,12 @@ export class GamePage implements OnInit, AfterViewChecked {
       x: 50,
       y: 50
     },
-    collision : false
+    collision : false,
+    score: {
+      p1: 0,
+      p2: 0
+    },
+    pong: 0
   };
   bar1: any;
   bar2: any;
