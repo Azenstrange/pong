@@ -105,10 +105,6 @@ export class GamePage implements OnInit, AfterViewChecked {
       this.defineValues();
     });
 
-    setInterval(() => {
-      this.calculation();
-    }, 16);
-
     this.calculation();
   }
 
