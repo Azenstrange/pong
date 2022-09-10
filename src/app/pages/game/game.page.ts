@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+/* eslint-disable max-len */
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { map } from 'rxjs/operators';
 
@@ -8,15 +9,14 @@ import { map } from 'rxjs/operators';
   templateUrl: './game.page.html',
   styleUrls: ['./game.page.scss'],
 })
-export class GamePage implements OnInit {
-
+export class GamePage implements OnInit, AfterViewChecked {
   gameStatus: any;
   response = {
-    p1Y: 100,
-    p2Y: 100,
+    p1Y: 50,
+    p2Y: 50,
     ball: {
-      x: 100,
-      y: 100
+      x: 50,
+      y: 50
     },
     collision : false
   };
@@ -41,17 +41,26 @@ export class GamePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private socket: Socket
+    private socket: Socket,
+    private router: Router
   ) { }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key  === 'ArrowUp') {
+      this.socket.emit('movePaddleUp');
+    }
+
+    if (event.code === 'ArrowDown') {
+      this.socket.emit('movePaddleDown');
+    }
+  }
 
   ngOnInit() {
 
     this.userName = this.route.snapshot.paramMap.get('userName');
     this.roomName = this.route.snapshot.paramMap.get('roomName');
     this.reason =  this.route.snapshot.paramMap.get('reason');
-    console.log(this.userName);
-    console.log(this.roomName);
-    console.log(this.reason);
     this.socket.connect();
 
     if (this.reason === 'create') {
@@ -61,54 +70,66 @@ export class GamePage implements OnInit {
     }
 
     this.socket.on('invalid-room-name', () => {
-      console.log('invalid room name');
-      //todo send back
+      this.router.navigate(['/room']);
     });
 
     this.socket.on('room-created', roomName => {
-      console.log(`room ${roomName.roomName} created !`);
+      // console.log(`room ${roomName.roomName} created !`);
+      this.calculation();
     });
 
     this.socket.on('full-room', () => {
-      console.log('Room is full');
-      //todo send back
+      // console.log('Room is full');
+      this.calculation();
+      this.router.navigate(['/room']);
     });
 
     this.socket.fromEvent('room-joined').subscribe((data: any) => {
       data.users.forEach(user => {
-        console.log(user.name);
+        // console.log(user.name);
       });
     });
 
-    setTimeout(() => {
-      this.declareElements();
-
-      this.defineValues();
-      window.addEventListener('resize', () => {
-        this.defineValues();
-      });
-
+    this.socket.fromEvent('game-update').subscribe((data: any) => {
+      this.response.p1Y = data.p1Paddle.y;
+      this.response.p2Y = data.p2Paddle.y;
       this.calculation();
-      setInterval(() => {
-        this.calculation();
-      }, 16);
+    });
 
-    }, 1000);
+  }
+
+  ngAfterViewChecked() {
+    this.declareElements();
+    this.defineValues();
+    window.addEventListener('resize', () => {
+      this.defineValues();
+    });
+
+    setInterval(() => {
+      this.calculation();
+    }, 16);
+
+    this.calculation();
+  }
+
+
+  sendCustomEvent() {
+    this.socket.emit('movePaddleUp');
   }
 
   declareElements(){
-    this.bar1 = document.querySelector('#bar1');
-    this.bar2 = document.querySelector('#bar2');
-    this.ball = document.querySelector('#ball');
-    this.gameWindow = document.querySelector('.pong_main_game');
+    this.bar1 = document.getElementsByClassName('bar1');
+    this.bar2 = document.getElementsByClassName('bar2');
+    this.ball = document.getElementsByClassName('ball');
+    this.gameWindow = document.getElementsByClassName('pong_main_game');
   }
 
   defineValues() {
-    this.width = this.gameWindow.scrollWidth * devicePixelRatio;
-    this.height = this.gameWindow.scrollHeight * devicePixelRatio;
-    this.barHeight = this.bar1.scrollHeight * devicePixelRatio;
-    this.barWidth = this.bar1.scrollWidth * devicePixelRatio;
-    this.ballHeight = this.ball.scrollHeight * devicePixelRatio;
+    this.width = this.gameWindow[this.gameWindow.length-1].clientWidth * devicePixelRatio;
+    this.height = this.gameWindow[this.gameWindow.length-1].clientHeight * devicePixelRatio;
+    this.barHeight = this.bar1[this.bar1.length-1].clientHeight * devicePixelRatio;
+    this.barWidth = this.bar1[this.bar1.length-1].clientWidth * devicePixelRatio;
+    this.ballHeight = this.ball[this.ball.length-1].clientHeight * devicePixelRatio;
 
     this.minBarTravel = this.barHeight/2;
     this.maxBarTravel = this.height - this.barHeight;
@@ -116,15 +137,14 @@ export class GamePage implements OnInit {
     this.maxBallTravelVertical = this.height - this.ballHeight;
     this.minBallTravelHorizontal = this.barWidth + this.ballHeight/2;
     this.maxBallTravelHorizontal = this.width - this.barWidth*2 - this.ballHeight;
-
     // console.log(this.maxBallTravelHorizontal)
   }
 
   calculation(){
-    this.bar1.style.top = this.minBarTravel + this.maxBarTravel/100 * this.response.p1Y + 'px';
-    this.bar2.style.top = this.minBarTravel + this.maxBarTravel/100 * this.response.p2Y + 'px';
-    this.ball.style.top = this.minBallTravelVertical + this.maxBallTravelVertical/100 * this.response.ball.y + 'px';
-    this.ball.style.left = this.minBallTravelHorizontal + this.maxBallTravelHorizontal/100 * this.response.ball.x + 'px';
+    this.bar1[this.bar1.length-1].style.top = this.minBarTravel + this.maxBarTravel/100 * this.response.p1Y + 'px';
+    this.bar2[this.bar2.length-1].style.top = this.minBarTravel + this.maxBarTravel/100 * this.response.p2Y + 'px';
+    this.ball[this.ball.length-1].style.top = this.minBallTravelVertical + this.maxBallTravelVertical/100 * this.response.ball.y + 'px';
+    this.ball[this.ball.length-1].style.left = this.minBallTravelHorizontal + this.maxBallTravelHorizontal/100 * this.response.ball.x + 'px';
   }
 
 }

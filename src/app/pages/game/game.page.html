@@ -9,12 +9,12 @@
 <ion-content>
   <ion-row class="pong_game">
     <ion-col size="2" class="pong_bar">
-      <p>barre</p>
+      <p tappable (click)="sendCustomEvent()">barre</p>
     </ion-col>
     <ion-col size="10" class="pong_main_game">
-      <div id="bar1" class="bar"></div>
-      <div id="bar2" class="bar"></div>
-      <div id="ball"></div>
+      <div id="bar1" class="bar bar1"></div>
+      <div id="bar2" class="bar bar2"></div>
+      <div id="ball" class="ball"></div>
       <div id="separator"></div>
     </ion-col>
   </ion-row>
