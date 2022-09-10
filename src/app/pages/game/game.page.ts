@@ -98,6 +98,10 @@ export class GamePage implements OnInit, AfterViewChecked {
     this.socket.fromEvent('game-update').subscribe((data: any) => {
       this.response.p1Y = data.p1Paddle.y;
       this.response.p2Y = data.p2Paddle.y;
+      this.response.score = data.score;
+      this.response.pong = data.pong;
+      this.response.ball.x = data.ball.x;
+      this.response.ball.y = data.ball.y;
       this.calculation();
     });
 
