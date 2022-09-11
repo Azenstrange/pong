@@ -4,7 +4,12 @@
   <ion-row class="pong_rooms">
     <ion-col size="3" class="pong_searchsize">
       <ion-item   class="pong_searchbar">
-        <ion-grid>
+        <ion-grid><ion-row>
+          <ion-col>
+            <ion-input placeholder="Username" id="nameInput" class="searchbar_button name_input" [(ngModel)]="userName"> 
+            </ion-input>
+          </ion-col>
+        </ion-row>
           <ion-row>
             <ion-col>
               <ion-button id="create-room" expand="block" class="ion-justify-content-center searchbar_button" (click)="createRoom()">
@@ -24,7 +29,6 @@
                         <img src="../../assets\arroxs.png" alt="" class="ion-align-items-center help-img">
                       </ion-col>
                     </ion-row>
-
                   </ion-content>
                 </ng-template>
               </ion-modal>

@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://86.246.156.100:5050', options: {} };
+const config: SocketIoConfig = { url: 'http://86.246.151.181:5050', options: {} };
 // const config: SocketIoConfig = { url: 'http://localhost:5050', options: {} };
 // const config: SocketIoConfig = { url: 'http://192.168.1.63:5050', options: {} };
 @NgModule({
