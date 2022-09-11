@@ -10,13 +10,14 @@
   <ion-row class="pong_game">
     <ion-col size="2" class="pong_bar">
       <div>SCORE</div>
-      <div>YOU : <span class="score" id="P1">0</span></div>
-      <div>OPPONENT : <span class="score" id="P2">0</span></div>
+      <div>PONG : <span class="score" id="Pong">{{response.pong}}</span></div>
+      <div>YOU : <span class="score" id="P1">{{response.score.p1}}</span></div>
+      <div>OPPONENT : <span class="score" id="P2">{{response.score.p2}}</span></div>
     </ion-col>
     <ion-col size="10" class="pong_main_game">
-      <div id="bar1" class="bar"></div>
-      <div id="bar2" class="bar"></div>
-      <div id="ball"></div>
+      <div id="bar1" class="bar bar1"></div>
+      <div id="bar2" class="bar bar2"></div>
+      <div id="ball" class="ball"></div>
       <div id="separator"></div>
     </ion-col>
   </ion-row>

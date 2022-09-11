@@ -23,6 +23,7 @@ export class RoomPage implements OnInit {
     this.socket.connect();
     this.socket.emit('getRooms');
     this.socket.on('getRooms', rooms => {
+      console.log('hi');
       this.roomsList = rooms;
       console.log(this.roomsList);
     });
@@ -47,7 +48,7 @@ export class RoomPage implements OnInit {
       ],
       inputs: [
         {
-          placeholder: 'userName'
+          placeholder: 'Username'
         },
         {
           placeholder: 'Room Name'
