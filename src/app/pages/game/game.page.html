@@ -1,18 +1,12 @@
 <app-navbar></app-navbar>
-<!-- 
-<ion-header>
-  <ion-toolbar>
-    <ion-title>game</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 
 <ion-content>
   <ion-row class="pong_game">
     <ion-col size="2" class="pong_bar">
       <div>SCORE</div>
       <div>PONG : <span class="score" id="Pong">{{response.pong}}</span></div>
-      <div>YOU : <span class="score" id="P1">{{response.score.p1}}</span></div>
-      <div>OPPONENT : <span class="score" id="P2">{{response.score.p2}}</span></div>
+      <div>{{userName}} : <span class="score" id="P1">{{response.score.p1}}</span></div>
+      <div>{{userName2}} : <span class="score" id="P2">{{response.score.p2}}</span></div>
     </ion-col>
     <ion-col size="10" class="pong_main_game">
       <div id="bar1" class="bar bar1"></div>

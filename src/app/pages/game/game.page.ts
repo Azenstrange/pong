@@ -41,6 +41,7 @@ export class GamePage implements OnInit, AfterViewChecked {
   minBallTravelHorizontal: number;
   maxBallTravelHorizontal: number;
   userName = 'Player';
+  userName2 = 'Player';
   roomName = '';
   reason = '';
 
@@ -85,14 +86,13 @@ export class GamePage implements OnInit, AfterViewChecked {
 
     this.socket.on('full-room', () => {
       // console.log('Room is full');
-      this.calculation();
+      // this.calculation();
       this.router.navigate(['/room']);
     });
 
     this.socket.fromEvent('room-joined').subscribe((data: any) => {
-      data.users.forEach(user => {
-        // console.log(user.name);
-      });
+      this.userName = data.users[0].name;
+      this.userName2 = data.users[1].name;
     });
 
     this.socket.fromEvent('game-update').subscribe((data: any) => {
